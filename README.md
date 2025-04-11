@@ -3,46 +3,55 @@ Build seamless identity-aware integrations for LLM agents
 
 ## Usage
 
+### Initialization
+
+```py
+from agent_identity_sdk import AgentIdentity
+from dotenv import load_dotenv
+import os
+
+config = {
+   "agent_id": os.getenv("AGENT_ID"),
+   "agent_secret": os.getenv("AGENT_SECRET")
+}
+
+agent = AgentIdentity(config)
+```
+
+Once the agent is created, its instance methods can be used to invoke authentication.
+
 ### Get access token
 
-```bash
-from agent_identity_sdk import AuthClient
-
-token = AuthClient.getAccessToken(authz_code)
+```py
+token = agent.getAccessToken(authz_code)
 ```
 
 ### Refresh access token
 
-```bash
-from agent_identity_sdk import AuthClient
+```py
+code_verifier = "<code_verifier>" # code verifier to pass when PKCE is enabled
+authz_code = "<authorization_code>" # authorization code received at the callback URL 
+refresh_token = "<refresh_token>" # refresh token to be used to refresh access token
 
-code_verifier = "<code_verifier_when_PKCE_is_enabled"
-authz_code = "<authorization_code_received_by_the_callback_url>" 
-refresh_token = "<refresh_token_to_be_used_to_refresh_access_token>"
-
-token = AuthClient.getAccessToken(authz_code, code_verifier, refresh_token)
+token = agent.getAccessToken(authz_code, code_verifier, refresh_token)
 ```
 
 ### Initiate on-behalf-of authentication
 
-```bash
-from agent_identity_sdk import AuthClient
-
+```py
 connection = "gmail";
 scopes = (
     "https://www.googleapis.com/auth/gmail.readonly",
     "https://www.googleapis.com/auth/gmail.labels",
 )
 
-AuthClient.initOnBehalfOfAuth(connection,scopes)
+agent.initOnBehalfOfAuth(connection,scopes)
 ```
 
 ## Initiate async authentication
 
 ```bash
-from agent_identity_sdk import AuthClient
-
 username = "johndoe@example.com" # The user for which the async authentication flow should be initiated
 
-AuthClient.initAsyncAuth(username)
+agent.initAsyncAuth(username)
 ```
