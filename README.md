@@ -18,7 +18,7 @@ config = {
 agent = AgentIdentity(config)
 ```
 
-Once the agent is created, its instance methods can be used to invoke authentication.
+Once the agent is initialized, its instance methods can be used to invoke authentication.
 
 ### Get access token
 
