@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='agent-identity-sdk',
+    name='asgardeo_agent_identity_sdk',
     version='0.1.0',
     description='Build seamless identity-aware integrations for LLM agents',
     long_description=open('README.md').read(),
