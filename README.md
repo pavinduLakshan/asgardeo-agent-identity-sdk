@@ -97,19 +97,28 @@ agent.initOnBehalfOfAuth(on_behalf_of_auth_request)
 
 ```py
 on_behalf_of_auth_request = {
-    connection = "gmail";
-    scopes = (
+    "connection": "gmail";
+    "scopes": (
         "https://www.googleapis.com/auth/gmail.readonly",
         "https://www.googleapis.com/auth/gmail.labels",
     )
 }
+
 agent.initOnBehalfOfAuth(on_behalf_of_auth_request)
 ```
 
-### Async authentication
+3. For Async Auth (applicable for both first party and third party services)
 
-```bash
-username = "johndoe@example.com" # The user for which the async authentication flow should be initiated
+```py
+on_behalf_of_auth_request = {
+    "connection": "gmail",
+    "scopes": (
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.labels",
+    ),
+    "username": "johndoe@example.com", # The user for which the async authentication flow should be initiated
+    "async": True # Indicates the authentication should be completed asynchronously, using CIBA. 
+}
 
-agent.initAsyncAuth(username)
+agent.initOnBehalfOfAuth(on_behalf_of_auth_request)
 ```
