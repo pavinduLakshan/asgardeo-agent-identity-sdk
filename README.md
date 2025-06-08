@@ -64,6 +64,7 @@ token = agent.getAccessToken()
 ```py
 # Get an access token using authorization code grant.
 options = {
+  "scopes": [],
   "authorization_code": "",
   "code_verifier": "" # optional, required when PKCE is enabled
 }
@@ -84,10 +85,10 @@ token = agent.refreshAccessToken(refresh_token)
 
 ```py
 on_behalf_of_auth_request = {
-    "scopes": (
+    "scopes": [
         "read_bookings",
         "create_bookings"
-    )
+    ]
 }
 
 agent.initOnBehalfOfAuth(on_behalf_of_auth_request)
@@ -116,9 +117,8 @@ on_behalf_of_auth_request = {
         "https://www.googleapis.com/auth/gmail.readonly",
         "https://www.googleapis.com/auth/gmail.labels",
     ),
-    "username": "johndoe@example.com", # The user for which the async authentication flow should be initiated
-    "async": True # Indicates the authentication should be completed asynchronously, using CIBA. 
+    "username": "johndoe@example.com", # The user for which the async authentication flow should be initiated, required for async auth
 }
 
-agent.initOnBehalfOfAuth(on_behalf_of_auth_request)
+agent.initOnBehalfOfAuth(on_behalf_of_auth_request, { async: True })
 ```
